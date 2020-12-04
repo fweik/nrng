@@ -14,5 +14,5 @@ foreach(TEST_SRC ${TEST_SRCS})
   add_executable(${TEST_NAME} ${TEST_SRC})
   target_link_libraries(${TEST_NAME} main_test nrng::nrng)
 
-  add_test(NAME ${TEST_NAME} COMMAND ${TEST_NAME})
+  add_test(NAME ${TEST_NAME} COMMAND "$<TARGET_FILE:${TEST_NAME}>")
 endforeach()
