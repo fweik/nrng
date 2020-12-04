@@ -1,134 +1,24 @@
-# cpp_starter_project
+# Numeric RaNGes
 
-[![codecov](https://codecov.io/gh/lefticus/cpp_starter_project/branch/master/graph/badge.svg)](https://codecov.io/gh/lefticus/cpp_starter_project)
-
-[![Build Status](https://travis-ci.org/lefticus/cpp_starter_project.svg?branch=master)](https://travis-ci.org/lefticus/cpp_starter_project)
-
-[![Build status](https://ci.appveyor.com/api/projects/status/ro4lbfoa7n0sy74c/branch/master?svg=true)](https://ci.appveyor.com/project/lefticus/cpp-starter-project/branch/master)
+[![codecov](https://codecov.io/gh/fweik/nrng/branch/main/graph/badge.svg)](https://codecov.io/gh/fweik/nrng)
 
 ![CMake](https://github.com/lefticus/cpp_starter_project/workflows/CMake/badge.svg)
 
+This repository provides the constrained and range-based version of the algorithms from the STL numerics
+libarary that did not make it into C++20.
 
 ## Getting Started
 
-### Use the Github template
-First, click the green `Use this template` button near the top of this page.
-This will take you to Github's ['Generate Repository'](https://github.com/lefticus/cpp_starter_project/generate) page. 
-Fill in a repository name and short description, and click 'Create repository from template'. 
-This will allow you to create a new repository in your Github account, 
-prepopulated with the contents of this project. 
-Now you can clone the project locally and get to work!
-
-    $ git clone https://github.com/<user>/<your_new_repo>.git
-
-### Remove frameworks you're not going to use
-If you know you're not going to use one or more of the optional gui/graphics 
-frameworks (fltk, gtkmm, imgui, etc.), you can remove them with `git rm`:
-
-    $ git rm -r src/<unnecessary_framework>
-
-## Dependencies
-
-Note about install commands: 
-- for Windows, we use [choco](https://chocolatey.org/install).
-- for MacOS, we use [brew](https://brew.sh/). 
-- In case of an error in cmake, make sure that the dependencies are on the PATH.
+The library is header only and has no dependencies, except a C++20 compatible compiler with concept and
+ranges support. It can be consumed via cmake by adding it as a subdirectory, in which case the target
+`nrng::nrng` will be available, or by copying the files under `include` to a place where they are found.
+Installing the library is currently not supported.
 
 ### Necessary Dependencies
-1. A C++ compiler that supports C++17.
+1. A C++ compiler that supports C++20.
 See [cppreference.com](https://en.cppreference.com/w/cpp/compiler_support)
 to see which features are supported by each compiler.
-The following compilers should work:
-
-  * [gcc 7+](https://gcc.gnu.org/)
-	<details>
-	<summary>Install command</summary>
-
-	- Debian/Ubuntu:
-		
-			sudo apt install build-essential
-
-	- Windows:
-		
-			choco install mingw -y
-
-	- MacOS:
-		
-			brew install gcc
-	</details>
-
-  * [clang 6+](https://clang.llvm.org/)
-	<details>
-	<summary>Install command</summary>
-
-	- Debian/Ubuntu:
-		
-			bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
-
-	- Windows:
-
-		Visual Studio 2019 ships with LLVM (see the Visual Studio section). However, to install LLVM separately:
-		
-			choco install llvm -y
-			
-		llvm-utils for using external LLVM with Visual Studio generator:
-			
-			git clone https://github.com/zufuliu/llvm-utils.git
-			cd llvm-utils/VS2017
-			.\install.bat
-
-	- MacOS:
- 		
-			brew install llvm
-	</details>
-
-  * [Visual Studio 2019 or higher](https://visualstudio.microsoft.com/)
-	<details>
-	<summary>Install command + Environment setup</summary>
-
-	On Windows, you need to install Visual Studio 2019 because of the SDK and libraries that ship with it.
-
-  	Visual Studio IDE - 2019 Community (installs Clang too):
-		
-  	  	choco install -y visualstudio2019community --package-parameters "add Microsoft.VisualStudio.Workload.NativeDesktop --includeRecommended --includeOptional --passive --locale en-US"
-		
-	Put MSVC compiler, Clang compiler, and vcvarsall.bat on the path:
-
-			choco install vswhere -y
-			refreshenv
-			
-			$clpath = vswhere -latest -prerelease -find **/Hostx64/x64/*   # for x64
-			[Environment]::SetEnvironmentVariable("Path", $env:Path + ";$clpath", "User")
-			
-			$clangpath = vswhere -latest -prerelease -find **/Llvm/bin/*
-			[Environment]::SetEnvironmentVariable("Path", $env:Path + ";$clangpath", "User")
-
-			$vcvarsallpath =  vswhere -latest -prerelease -find **/Auxiliary/Build/*
-			[Environment]::SetEnvironmentVariable("Path", $env:Path + ";$vcvarsallpath", "User")
-			refreshenv
-
-	</details>
-
-
-2. [Conan](https://conan.io/)
-	<details>
-	<summary>Install Command</summary>
-	
-	- Via pip - https://docs.conan.io/en/latest/installation.html#install-with-pip-recommended
-		
-			pip install --user conan
-	
-	- Windows:
-		
-			choco install conan -y
-	
-	- MacOS:
-	 	
-			brew install conan
-	
-	</details>
-
-3. [CMake 3.15+](https://cmake.org/)
+2. [CMake 3.15+](https://cmake.org/)
 	<details>
 	<summary>Install Command</summary>
 	
@@ -189,25 +79,6 @@ The following compilers should work:
 	</details>
 
 
-  * [Cppcheck](http://cppcheck.sourceforge.net/)
-	<details>
-	<summary>Install Command</summary>
-
-	- Debian/Ubuntu:
-		
-			sudo apt-get install cppcheck
-
-	- Windows:
-		
-			choco install cppcheck -y
-
-	- MacOS:
- 		
-			brew install cppcheck
-
-	</details>
-
-
   * [include-what-you-use](https://include-what-you-use.org/)
 	<details>
 	<summary>Install Command</summary>
@@ -216,31 +87,9 @@ The following compilers should work:
 	https://github.com/include-what-you-use/include-what-you-use#how-to-install
 	</details>
 
-#### GUI libraries
-This project can be made to work with several optional GUI frameworks.
-
-If desired, you should install the following optional dependencies as
-directed by their documentation, linked here:
- 
-- [FLTK](https://www.fltk.org/doc-1.4/index.html)
-- [GTKMM](https://www.gtkmm.org/en/documentation.html)
-- [QT](https://doc.qt.io/)
-
-The following dependencies can be downloaded automatically by CMake and Conan. 
-All you need to do to install them is to turn on a CMake flag during 
-configuration.
-If you run into difficulty using them, please refer to their documentation,
-linked here:
-
-- [NANA](http://nanapro.org/en-us/documentation/)
-- [SDL](http://wiki.libsdl.org/FrontPage)
-- [IMGUI](https://github.com/ocornut/imgui/tree/master/docs): 
-  This framework depends on SFML, and if you are using Linux, you may need
-  to install several of SFML's dependencies using your package manager. See 
-  [the SFML build tutorial](https://www.sfml-dev.org/tutorials/2.5/compile-with-cmake.php)
-  for specifics.
-
 ## Build Instructions
+
+Instruction for building the tests.
 
 ### Build directory
 Make a build directory:
@@ -404,65 +253,3 @@ project (all targets):
 For Visual Studio, give the build configuration (Release, RelWithDeb, Debug, etc) like the following:
 
     cmake --build ./build -- /p:configuration=Release
-
-## Troubleshooting
-
-### Update Conan
-Many problems that users have can be resolved by updating Conan, so if you are 
-having any trouble with this project, you should start by doing that.
-
-To update conan: 
-
-    $ pip install --user --upgrade conan 
-
-You may need to use `pip3` instead of `pip` in this command, depending on your 
-platform.
-
-### Clear Conan cache
-If you continue to have trouble with your Conan dependencies, you can try 
-clearing your Conan cache:
-
-    $ conan remove -f '*'
-    
-The next time you run `cmake` or `cmake --build`, your Conan dependencies will
-be rebuilt. If you aren't using your system's default compiler, don't forget to 
-set the CC, CXX, CMAKE_C_COMPILER, and CMAKE_CXX_COMPILER variables, as 
-described in the 'Build using an alternate compiler' section above.
-
-### Identifying misconfiguration of Conan dependencies
-
-If you have a dependency 'A' that requires a specific version of another 
-dependency 'B', and your project is trying to use the wrong version of 
-dependency 'B', Conan will produce warnings about this configuration error 
-when you run CMake. These warnings can easily get lost between a couple 
-hundred or thousand lines of output, depending on the size of your project. 
-
-If your project has a Conan configuration error, you can use `conan info` to 
-find it. `conan info` displays information about the dependency graph of your 
-project, with colorized output in some terminals.
-
-    $ cd build
-    $ conan info .
-
-In my terminal, the first couple lines of `conan info`'s output show all of the
-project's configuration warnings in a bright yellow font. 
-
-For example, the package `spdlog/1.5.0` depends on the package `fmt/6.1.2`.
-If you were to modify the file `cmake/Conan.cmake` so that it requires an 
-earlier version of `fmt`, such as `fmt/6.0.0`, and then run:
-
-    $ conan remove -f '*'       # clear Conan cache
-    $ rm -rf build              # clear previous CMake build
-    $ mkdir build && cd build
-    $ cmake ..                  # rebuild Conan dependencies
-    $ conan info .
-
-...the first line of output would be a warning that `spdlog` needs a more recent
-version of `fmt`.
-
-## Testing
-See [Catch2 tutorial](https://github.com/catchorg/Catch2/blob/master/docs/tutorial.md)
-
-## Fuzz testing
-
-See [libFuzzer Tutorial](https://github.com/google/fuzzing/blob/master/tutorial/libFuzzerTutorial.md)
