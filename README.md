@@ -5,7 +5,7 @@
 ![CMake](https://github.com/lefticus/cpp_starter_project/workflows/CMake/badge.svg)
 
 This repository provides the constrained and range-based version of the algorithms from the STL numerics
-libarary that did not make it into C++20.
+library that did not make it into C++20.
 
 ## Getting Started
 
