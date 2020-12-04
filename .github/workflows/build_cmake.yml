@@ -13,6 +13,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
+        g++: [10]
 
     steps:
     - uses: actions/checkout@v2
