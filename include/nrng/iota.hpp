@@ -57,7 +57,7 @@ constexpr std::ranges::borrowed_iterator_t<R> iota(R &&rng, T value)
   using std::begin;
   using std::end;
 
-  return iota(begin(rng), end(rng), value);
+  return ::nrng::iota(begin(rng), end(rng), value);
 }
 
 }// namespace nrng

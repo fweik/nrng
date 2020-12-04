@@ -13,7 +13,7 @@ TEST_CASE("iota iterator version")
   std::iota(expected.begin(), expected.end(), init);
 
   std::array<float, elements> result{};
-  auto const *out = nrng::iota(result.begin(), result.end(), init);
+  auto out = nrng::iota(result.begin(), result.end(), init);
 
   CHECK(out == result.begin() + elements);
   CHECK(expected == result);
@@ -30,7 +30,7 @@ TEST_CASE("iota range version")
   /* with l-value range */
   {
     std::array<float, elements> result{};
-    auto const *out = nrng::iota(result, init);
+    auto out = nrng::iota(result, init);
 
     CHECK(out == result.begin() + elements);
     CHECK(expected == result);
