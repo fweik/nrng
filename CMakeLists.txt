@@ -4,6 +4,7 @@ project(nrng CXX)
 
 # The exported library
 add_library(nrng INTERFACE)
+add_library(nrng::nrng ALIAS nrng)
 target_include_directories(nrng INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 target_compile_features(nrng INTERFACE cxx_std_20)
 
