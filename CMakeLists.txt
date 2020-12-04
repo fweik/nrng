@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 3.15)
 
-# Set the project name to your project name, my project isn't very descriptive
 project(nrng CXX)
 
 # The exported library
@@ -39,10 +38,7 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
   # Add co-shipped dependencies
   add_subdirectory(external)
 
-  option(BUILD_TESTING "Build tests" ON)
-  if(BUILD_TESTING)
-    enable_testing()
-    message("Building Tests. Be sure to check out test/constexpr_tests for constexpr testing")
-    add_subdirectory(tests)
-  endif()
+  enable_testing()
+  message("Building Tests.")
+  add_subdirectory(tests)
 endif()
