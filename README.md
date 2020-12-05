@@ -11,7 +11,6 @@ ranges support. It can be consumed via cmake by adding it as a subdirectory, in 
 `nrng::nrng` will be available, or by copying the files under `include` to a place where they are found.
 Installing the library is currently not supported.
 
-
 ### Minimal Example
 
 ```
@@ -23,6 +22,7 @@ Installing the library is currently not supported.
 ```
 
 `CMakeLists.txt`:
+
 ```cmake
 cmake_minimum_required(VERSION 3.15)
 
@@ -35,6 +35,7 @@ target_link_libraries(example PRIVATE nrng::nrng)
 ```
 
 `main.cpp`:
+
 ```c++
 #include <nrng/reduce.hpp>
 
@@ -46,6 +47,7 @@ int main() {
 ```
 
 ### Necessary Dependencies
+
 1. A C++ compiler that supports C++20.
 See [cppreference.com](https://en.cppreference.com/w/cpp/compiler_support)
 to see which features are supported by each compiler.
@@ -69,7 +71,7 @@ to see which features are supported by each compiler.
 
 ### Optional Dependencies
 
-Those are not required to consumed the library.
+Those are not required to consume the library.
 
 #### C++ Tools
   * [Doxygen](http://doxygen.nl/)
@@ -126,14 +128,17 @@ Those are not required to consumed the library.
 Instruction for building the tests.
 
 ### Build directory
+
 Make a build directory:
-```
+
+```bash
 mkdir build
 ```
+
 ### Specify the compiler using environment variables
 
-By default (if you don't set environment variables `CC` and `CXX`), the system default compiler will be used. If the default compiler does not
-support C++20 it may be neccessary to install a newer compiler and explicittly configure cmake to use it.
+By default, (if you don't set environment variables `CC` and `CXX`), the system default compiler will be used. If the default compiler does not
+support C++20 it may be necessary to install a newer compiler and explicitly configure cmake to use it.
 
 <details>
 <summary>Commands for setting the compilers </summary>
@@ -209,24 +214,31 @@ To configure the project and write makefiles, you could use `cmake` with a bunch
 The easier option is to run cmake interactively:
 
 #### **Configure via ccmake**:
+
 with the Cmake Curses Dialog Command Line tool:  
 
-    ccmake -S . -B ./build
+```bash
+ccmake -S . -B ./build
+```
 
-Once `ccmake` has finished setting up, press 'c' to configure the project, 
-press 'g' to generate, and 'q' to quit.
+Once `ccmake` has finished setting up, press 'c' to configure the project,  press 'g' to generate, and 'q' to quit.
 
 ### Build
-Once you have selected all the options you would like to use, you can build the 
-project (all targets):
 
-    cmake --build ./build
+Once you have selected all the options you would like to use, you can build the project (all targets):
+
+```bash
+cmake --build ./build
+```
 
 For Visual Studio, give the build configuration (Release, RelWithDeb, Debug, etc) like the following:
 
-    cmake --build ./build -- /p:configuration=Release
+```bash
+cmake --build ./build -- /p:configuration=Release
+```
 
 ## Run the tests
 
-    ctest -C Release
-
+```bash
+ctest -C Release
+```
