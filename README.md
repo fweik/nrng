@@ -1,11 +1,8 @@
 # Numeric RaNGes
 
-[![codecov](https://codecov.io/gh/fweik/nrng/branch/main/graph/badge.svg)](https://codecov.io/gh/fweik/nrng)
+![Cmake](https://github.com/fweik/nrng/workflows/CMake/badge.svg)
 
-![CMake](https://github.com/lefticus/cpp_starter_project/workflows/CMake/badge.svg)
-
-This repository provides the constrained and range-based version of the algorithms from the STL numerics
-library that did not make it into C++20.
+This repository provides the constrained iterator/sentinel-based and range-based version of the algorithms from the STL numerics library that did not make it into C++20.
 
 ## Getting Started
 
@@ -14,7 +11,43 @@ ranges support. It can be consumed via cmake by adding it as a subdirectory, in 
 `nrng::nrng` will be available, or by copying the files under `include` to a place where they are found.
 Installing the library is currently not supported.
 
+### Minimal Example
+
+```
+├── CMakeLists.txt
+├── external
+│   └── nrng
+└── src
+    └── main.cpp
+```
+
+`CMakeLists.txt`:
+
+```cmake
+cmake_minimum_required(VERSION 3.15)
+
+project(example LANGUAGES CXX)
+
+add_subdirectory("external/nrng")
+
+add_executable(example "src/main.cpp")
+target_link_libraries(example PRIVATE nrng::nrng)
+```
+
+`main.cpp`:
+
+```c++
+#include <nrng/reduce.hpp>
+
+#include <array>
+
+int main() {
+  return nrng::reduce(std::array{1, 2, 3, 4, 5});
+}
+```
+
 ### Necessary Dependencies
+
 1. A C++ compiler that supports C++20.
 See [cppreference.com](https://en.cppreference.com/w/cpp/compiler_support)
 to see which features are supported by each compiler.
@@ -37,6 +70,9 @@ to see which features are supported by each compiler.
 	</details>
 
 ### Optional Dependencies
+
+Those are not required to consume the library.
+
 #### C++ Tools
   * [Doxygen](http://doxygen.nl/)
 	<details>
@@ -92,17 +128,17 @@ to see which features are supported by each compiler.
 Instruction for building the tests.
 
 ### Build directory
+
 Make a build directory:
-```
+
+```bash
 mkdir build
 ```
+
 ### Specify the compiler using environment variables
 
-By default (if you don't set environment variables `CC` and `CXX`), the system default compiler will be used.
-
-Conan and CMake use the environment variables CC and CXX to decide which compiler to use. So to avoid the conflict issues only specify the compilers using these variables.
-
-CMake will detect which compiler was used to build each of the Conan targets. If you build all of your Conan targets with one compiler, and then build your CMake targets with a different compiler, the project may fail to build.
+By default, (if you don't set environment variables `CC` and `CXX`), the system default compiler will be used. If the default compiler does not
+support C++20 it may be necessary to install a newer compiler and explicitly configure cmake to use it.
 
 <details>
 <summary>Commands for setting the compilers </summary>
@@ -178,19 +214,31 @@ To configure the project and write makefiles, you could use `cmake` with a bunch
 The easier option is to run cmake interactively:
 
 #### **Configure via ccmake**:
+
 with the Cmake Curses Dialog Command Line tool:  
 
-    ccmake -S . -B ./build
+```bash
+ccmake -S . -B ./build
+```
 
-Once `ccmake` has finished setting up, press 'c' to configure the project, 
-press 'g' to generate, and 'q' to quit.
+Once `ccmake` has finished setting up, press 'c' to configure the project,  press 'g' to generate, and 'q' to quit.
 
 ### Build
-Once you have selected all the options you would like to use, you can build the 
-project (all targets):
 
-    cmake --build ./build
+Once you have selected all the options you would like to use, you can build the project (all targets):
+
+```bash
+cmake --build ./build
+```
 
 For Visual Studio, give the build configuration (Release, RelWithDeb, Debug, etc) like the following:
 
-    cmake --build ./build -- /p:configuration=Release
+```bash
+cmake --build ./build -- /p:configuration=Release
+```
+
+## Run the tests
+
+```bash
+ctest -C Release
+```
