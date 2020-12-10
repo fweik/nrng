@@ -2,12 +2,11 @@
 
 #include <nrng/reduce.hpp>
 
-#include <numeric>
 #include <array>
+#include <numeric>
 
-TEST_CASE("reduce iterator version without policy")
-{
-  auto constexpr a = std::array{ 1, 2, 3, 4, 5 };
+TEST_CASE("reduce iterator version without policy") {
+  auto constexpr a = std::array{1, 2, 3, 4, 5};
   /* plus version, default init */
   {
     auto constexpr expected = std::reduce(a.begin(), a.end());
@@ -38,9 +37,8 @@ TEST_CASE("reduce iterator version without policy")
   }
 }
 
-TEST_CASE("reduce range version without policy")
-{
-  auto constexpr a = std::array{ 1, 2, 3, 4, 5 };
+TEST_CASE("reduce range version without policy") {
+  auto constexpr a = std::array{1, 2, 3, 4, 5};
   /* plus version, default init */
   {
     auto constexpr expected = std::reduce(a.begin(), a.end());
@@ -71,13 +69,14 @@ TEST_CASE("reduce range version without policy")
   }
 }
 
-TEST_CASE("reduce iterator version with policy")
-{
-  auto constexpr a = std::array{ 1, 2, 3, 4, 5 };
+TEST_CASE("reduce iterator version with policy") {
+  auto constexpr a = std::array{1, 2, 3, 4, 5};
   /* plus version, default init */
   {
-    auto const expected = std::reduce(std::execution::par_unseq, a.begin(), a.end());
-    auto const result = nrng::reduce(std::execution::par_unseq, a.begin(), a.end());
+    auto const expected =
+        std::reduce(std::execution::par_unseq, a.begin(), a.end());
+    auto const result =
+        nrng::reduce(std::execution::par_unseq, a.begin(), a.end());
 
     CHECK(expected == result);
   }
@@ -86,8 +85,10 @@ TEST_CASE("reduce iterator version with policy")
   {
     auto constexpr init = 5;
 
-    auto const expected = std::reduce(std::execution::par_unseq, a.begin(), a.end(), init);
-    auto const result = nrng::reduce(std::execution::par_unseq, a.begin(), a.end(), init);
+    auto const expected =
+        std::reduce(std::execution::par_unseq, a.begin(), a.end(), init);
+    auto const result =
+        nrng::reduce(std::execution::par_unseq, a.begin(), a.end(), init);
 
     CHECK(expected == result);
   }
@@ -97,19 +98,21 @@ TEST_CASE("reduce iterator version with policy")
     auto constexpr init = 5;
     auto constexpr op = std::multiplies<>{};
 
-    auto const expected = std::reduce(std::execution::par_unseq, a.begin(), a.end(), init, op);
-    auto const result = nrng::reduce(std::execution::par_unseq, a.begin(), a.end(), init, op);
+    auto const expected =
+        std::reduce(std::execution::par_unseq, a.begin(), a.end(), init, op);
+    auto const result =
+        nrng::reduce(std::execution::par_unseq, a.begin(), a.end(), init, op);
 
     CHECK(expected == result);
   }
 }
 
-TEST_CASE("reduce range version with policy")
-{
-  auto constexpr a = std::array{ 1, 2, 3, 4, 5 };
+TEST_CASE("reduce range version with policy") {
+  auto constexpr a = std::array{1, 2, 3, 4, 5};
   /* plus version, default init */
   {
-    auto const expected = std::reduce(std::execution::par_unseq, a.begin(), a.end());
+    auto const expected =
+        std::reduce(std::execution::par_unseq, a.begin(), a.end());
     auto const result = nrng::reduce(std::execution::par_unseq, a);
 
     CHECK(expected == result);
@@ -119,7 +122,8 @@ TEST_CASE("reduce range version with policy")
   {
     auto constexpr init = 5;
 
-    auto const expected = std::reduce(std::execution::par_unseq, a.begin(), a.end(), init);
+    auto const expected =
+        std::reduce(std::execution::par_unseq, a.begin(), a.end(), init);
     auto const result = nrng::reduce(std::execution::par_unseq, a, init);
 
     CHECK(expected == result);
@@ -130,7 +134,8 @@ TEST_CASE("reduce range version with policy")
     auto constexpr init = 5;
     auto constexpr op = std::multiplies<>{};
 
-    auto const expected = std::reduce(std::execution::par_unseq, a.begin(), a.end(), init, op);
+    auto const expected =
+        std::reduce(std::execution::par_unseq, a.begin(), a.end(), init, op);
     auto const result = nrng::reduce(std::execution::par_unseq, a, init, op);
 
     CHECK(expected == result);
