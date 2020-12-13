@@ -4,8 +4,7 @@
 
 #include <array>
 
-TEST_CASE("iota iterator version")
-{
+TEST_CASE("iota iterator version") {
   auto const init = 4.F;
   auto constexpr elements = 5;
 
@@ -19,8 +18,7 @@ TEST_CASE("iota iterator version")
   CHECK(expected == result);
 }
 
-TEST_CASE("iota range version")
-{
+TEST_CASE("iota range version") {
   auto const init = 4.F;
   auto constexpr elements = 5;
 
@@ -38,9 +36,8 @@ TEST_CASE("iota range version")
 
   /* with r-value range */
   {
-    static_assert(std::is_same_v<
-      decltype(
-        nrng::iota(std::array<float, elements>{}, init)),
-      std::ranges::dangling>);
+    static_assert(std::is_same_v<decltype(nrng::iota(
+                                     std::array<float, elements>{}, init)),
+                                 std::ranges::dangling>);
   }
 }
