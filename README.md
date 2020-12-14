@@ -1,6 +1,7 @@
 # Numeric RaNGes
 
-![Cmake](https://github.com/fweik/nrng/workflows/CMake/badge.svg)
+![Linux](https://github.com/fweik/nrng/workflows/CMake/badge.svg)
+![Windows](https://ci.appveyor.com/api/projects/status/1hegoxj10724qbu8?svg=true)
 
 This repository aims to provide named, reusable numeric algorithms for C++.
 
@@ -22,7 +23,7 @@ Installing the library is currently not supported.
 
 ### Minimal Usage Example
 
-```
+```tree
 ├── CMakeLists.txt
 ├── external
 │   └── nrng
