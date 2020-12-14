@@ -2,7 +2,16 @@
 
 ![Cmake](https://github.com/fweik/nrng/workflows/CMake/badge.svg)
 
-This repository provides the constrained iterator/sentinel-based and range-based version of the algorithms from the STL numerics library that did not make it into C++20.
+This repository aims to provide named, reusable numeric algorithms for C++.
+
+It is in the very early stages, work in progress and contributions are very welcome.
+
+## Goals
+
+The goal is to provide generic building blocks for numeric calculations. It should help following the [no raw loops](https://www.youtube.com/watch?v=W2tWOdzgXHA)
+principle when writing numerics oriented code. As such it aims to provide named, reusable algorithms and not complete solvers or methods for specific problems. So an
+implementation of [Kahan summation](https://en.wikipedia.org/wiki/Kahan_summation_algorithm) would be a good candidate for inclusion, and a finite element
+solver would be out of scope.
 
 ## Getting Started
 
@@ -11,7 +20,7 @@ ranges support. It can be consumed via cmake by adding it as a subdirectory, in 
 `nrng::nrng` will be available, or by copying the files under `include` to a place where they are found.
 Installing the library is currently not supported.
 
-### Minimal Example
+### Minimal Usage Example
 
 ```
 ├── CMakeLists.txt
