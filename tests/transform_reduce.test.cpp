@@ -38,12 +38,19 @@ TEST_CASE("transform_reduce, unary version, range version") {
   auto constexpr a = std::array{1, 2, 3};
   auto constexpr b = std::array{2., 4., 5., 6., 7.};
 
-  auto constexpr result = nrng::transform_reduce(a, b, 0.);
-
   auto constexpr expected =
       std::transform_reduce(a.begin(), a.end(), b.begin(), 0.);
 
-  CHECK(result == expected);
+  {
+    auto constexpr result = nrng::transform_reduce(a, b, 0.);
+    CHECK(result == expected);
+  }
+
+  {
+    auto const result =
+        nrng::transform_reduce(std::execution::par_unseq, a, b, 0.);
+    CHECK(result == expected);
+  }
 }
 
 /*
@@ -81,13 +88,21 @@ TEST_CASE("transform_reduce, binary version, range version, with ops") {
   auto constexpr a = std::array{1, 2, 3};
   auto constexpr b = std::array{2., 4., 5., 6., 7.};
 
-  auto constexpr result =
-      nrng::transform_reduce(a, b, 0., std::divides<>{}, std::multiplies<>{});
-
   auto constexpr expected = std::transform_reduce(
       a.begin(), a.end(), b.begin(), 0., std::divides<>{}, std::multiplies<>{});
 
-  CHECK(result == expected);
+  {
+    auto constexpr result =
+        nrng::transform_reduce(a, b, 0., std::divides<>{}, std::multiplies<>{});
+    CHECK(result == expected);
+  }
+
+  {
+    auto const result =
+        nrng::transform_reduce(std::execution::par_unseq, a, b, 0.,
+                               std::divides<>{}, std::multiplies<>{});
+    CHECK(result == expected);
+  }
 }
 
 /*
@@ -119,10 +134,18 @@ TEST_CASE("transform_reduce, unary version, iterator version") {
 TEST_CASE("transform_reduce, unary version, range version") {
   auto constexpr a = std::array{1, 2, 3, 4, 5};
   auto constexpr unary_op = [](auto e) { return e * e; };
-
-  auto constexpr result = nrng::transform_reduce(a, 1, std::plus<>{}, unary_op);
   auto constexpr expected =
       std::transform_reduce(a.begin(), a.end(), 1, std::plus<>{}, unary_op);
 
-  CHECK(result == expected);
+  {
+    auto constexpr result =
+        nrng::transform_reduce(a, 1, std::plus<>{}, unary_op);
+    CHECK(result == expected);
+  }
+
+  {
+    auto const result = nrng::transform_reduce(std::execution::par_unseq, a, 1,
+                                               std::plus<>{}, unary_op);
+    CHECK(result == expected);
+  }
 }

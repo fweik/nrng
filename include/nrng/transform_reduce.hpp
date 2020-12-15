@@ -61,6 +61,19 @@ constexpr T transform_reduce(Rng1 rng1, Rng2 rng2, T init, BinaryOp1 op1,
                                   end(rng2), init, op1, op2);
 }
 
+template <execution_policy ExecutionPolicy, std::move_constructible T,
+          std::ranges::input_range Rng1, std::ranges::input_range Rng2,
+          class BinaryOp1, class BinaryOp2>
+constexpr T transform_reduce(ExecutionPolicy &&policy, Rng1 rng1, Rng2 rng2,
+                             T init, BinaryOp1 op1, BinaryOp2 op2) {
+  using std::ranges::begin;
+  using std::ranges::end;
+
+  return ::nrng::transform_reduce(std::forward<ExecutionPolicy>(policy),
+                                  begin(rng1), end(rng1), begin(rng2),
+                                  end(rng2), init, op1, op2);
+}
+
 template <std::move_constructible T, std::input_iterator I1,
           std::sentinel_for<I1> S1, std::input_iterator I2,
           std::sentinel_for<I2> S2>
@@ -105,6 +118,17 @@ constexpr T transform_reduce(Rng1 rng1, Rng2 rng2, T init) {
                                   end(rng2), init);
 }
 
+template <execution_policy ExecutionPolicy, std::move_constructible T,
+          std::ranges::forward_range Rng1, std::ranges::forward_range Rng2>
+T transform_reduce(ExecutionPolicy &&policy, Rng1 rng1, Rng2 rng2, T init) {
+  using std::ranges::begin;
+  using std::ranges::end;
+
+  return ::nrng::transform_reduce(std::forward<ExecutionPolicy>(policy),
+                                  begin(rng1), end(rng1), begin(rng2),
+                                  end(rng2), init);
+}
+
 template <std::move_constructible T, std::input_iterator I,
           std::sentinel_for<I> S, class BinaryOp, class UnaryOp>
 constexpr T transform_reduce(I first, S last, T init, BinaryOp binary_op,
@@ -115,10 +139,10 @@ constexpr T transform_reduce(I first, S last, T init, BinaryOp binary_op,
 }
 
 template <execution_policy ExecutionPolicy, std::move_constructible T,
-          std::input_iterator I, std::sentinel_for<I> S, class BinaryOp,
+          std::forward_iterator I, std::sentinel_for<I> S, class BinaryOp,
           class UnaryOp>
-constexpr T transform_reduce(ExecutionPolicy &&policy, I first, S last, T init,
-                             BinaryOp binary_op, UnaryOp unary_op) {
+T transform_reduce(ExecutionPolicy &&policy, I first, S last, T init,
+                   BinaryOp binary_op, UnaryOp unary_op) {
   return ::nrng::reduce(
       std::forward<ExecutionPolicy>(policy), first, last, init,
       [&](auto sum, auto e) { return binary_op(sum, unary_op(e)); });
@@ -131,6 +155,15 @@ constexpr T transform_reduce(Rng rng, T init, BinaryOp binary_op,
   return ::nrng::transform_reduce(std::ranges::begin(rng),
                                   std::ranges::end(rng), init, binary_op,
                                   unary_op);
+}
+
+template <execution_policy ExecutionPolicy, std::move_constructible T,
+          std::ranges::forward_range Rng, class BinaryOp, class UnaryOp>
+constexpr T transform_reduce(ExecutionPolicy &&policy, Rng rng, T init,
+                             BinaryOp binary_op, UnaryOp unary_op) {
+  return ::nrng::transform_reduce(
+      std::forward<ExecutionPolicy>(policy), std::ranges::begin(rng),
+      std::ranges::end(rng), init, binary_op, unary_op);
 }
 } // namespace nrng
 
