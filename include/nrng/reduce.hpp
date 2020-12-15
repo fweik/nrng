@@ -30,8 +30,14 @@ template <execution_policy ExecutionPolicy, std::forward_iterator I,
           std::sentinel_for<I> S, std::move_constructible T,
           ReductionOp<T, I> BinaryOp>
 T reduce(ExecutionPolicy &&policy, I first, S last, T init, BinaryOp op) {
-  return std::reduce(std::forward<ExecutionPolicy>(policy), first,
-                     first + std::ranges::distance(first, last), init, op);
+  if constexpr (std::is_same_v<I, S>) {
+    return std::reduce(std::forward<ExecutionPolicy>(policy), first, last, init,
+                       op);
+  } else {
+    return std::reduce(std::forward<ExecutionPolicy>(policy), first,
+                       std::next(first, std::ranges::distance(first, last)),
+                       init, op);
+  }
 }
 
 /** @overload */
