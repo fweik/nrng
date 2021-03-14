@@ -11,6 +11,7 @@ TEST_CASE("moments exists") {
       values.size();
 
   CHECK(result == expected);
+  CHECK(result == nrng::moment<2>(values.begin(), values.end()));
 }
 
 TEST_CASE("mean") {
