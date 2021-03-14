@@ -11,8 +11,7 @@ It is in the very early stages, work in progress and contributions are very welc
 
 The goal is to provide generic building blocks for numeric calculations. It should help following the [no raw loops](https://www.youtube.com/watch?v=W2tWOdzgXHA)
 principle when writing numerics oriented code. As such it aims to provide named, reusable algorithms and not complete solvers or methods for specific problems. So an
-implementation of [Kahan summation](https://en.wikipedia.org/wiki/Kahan_summation_algorithm) would be a good candidate for inclusion, and a finite element
-solver would be out of scope.
+implementation of [Kahan summation](https://en.wikipedia.org/wiki/Kahan_summation_algorithm) would be a good candidate for inclusion, and a finite element solver would be out of scope.
 
 ## Getting Started
 
@@ -79,33 +78,26 @@ to see which features are supported by each compiler.
 	
 	</details>
 
+### Implemented STL algorithms
+
+The library currently provides contrained version of the
+following STL algorithms.
+
+- [accumulate](include/nrng/accumulate.hpp)
+- [adjacent_difference](include/nrng/adjacent_difference.hpp)
+- [iota](include/nrng/iota.hpp)
+- [partial_sum](include/nrng/partial_sum.hpp)
+- [reduce](include/nrng/reduce.hpp)
+- [transform_reduce](include/nrng/transform_reduce.hpp)
+
+The algorithms should generally behave very similarly to
+the standard versions.
+
 ### Optional Dependencies
 
-Those are not required to consume the library.
+Those are not required to use the library.
 
 #### C++ Tools
-  * [Doxygen](http://doxygen.nl/)
-	<details>
-	<summary>Install Command</summary>
-
-	- Debian/Ubuntu:
-		
-			sudo apt-get install doxygen
-			sudo apt-get install graphviz
-
-	- Windows:
-		
-			choco install doxygen.install -y
-			choco install graphviz -y
-
-	- MacOS:
- 		
-			brew install doxygen
-	 		brew install graphviz
-
-	</details>
-
-
   * [ccache](https://ccache.dev/)
 	<details>
 	<summary>Install Command</summary>
