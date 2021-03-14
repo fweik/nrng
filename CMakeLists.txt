@@ -29,10 +29,6 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
   include(cmake/Sanitizers.cmake)
   enable_sanitizers(project_options)
 
-  # enable doxygen
-  include(cmake/Doxygen.cmake)
-  enable_doxygen()
-
   # allow for static analysis options
   include(cmake/StaticAnalyzers.cmake)
 
