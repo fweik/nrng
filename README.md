@@ -13,6 +13,24 @@ The goal is to provide generic building blocks for numeric calculations. It shou
 principle when writing numerics oriented code. As such it aims to provide named, reusable algorithms and not complete solvers or methods for specific problems. So an
 implementation of [Kahan summation](https://en.wikipedia.org/wiki/Kahan_summation_algorithm) would be a good candidate for inclusion, and a finite element solver would be out of scope.
 
+## Algorithms
+
+### Implemented STL algorithms
+
+The library currently provides constrained versions of the
+following STL algorithms.
+
+- [accumulate](include/nrng/accumulate.hpp)
+- [adjacent_difference](include/nrng/adjacent_difference.hpp)
+- [iota](include/nrng/iota.hpp)
+- [partial_sum](include/nrng/partial_sum.hpp)
+- [reduce](include/nrng/reduce.hpp)
+- [transform_reduce](include/nrng/transform_reduce.hpp)
+
+The algorithms should generally behave very similarly to
+the standard versions.
+
+
 ## Getting Started
 
 The library is header only and has no dependencies, except a C++20 compatible compiler with concept and
@@ -77,21 +95,6 @@ to see which features are supported by each compiler.
 			brew install cmake
 	
 	</details>
-
-### Implemented STL algorithms
-
-The library currently provides contrained version of the
-following STL algorithms.
-
-- [accumulate](include/nrng/accumulate.hpp)
-- [adjacent_difference](include/nrng/adjacent_difference.hpp)
-- [iota](include/nrng/iota.hpp)
-- [partial_sum](include/nrng/partial_sum.hpp)
-- [reduce](include/nrng/reduce.hpp)
-- [transform_reduce](include/nrng/transform_reduce.hpp)
-
-The algorithms should generally behave very similarly to
-the standard versions.
 
 ### Optional Dependencies
 
