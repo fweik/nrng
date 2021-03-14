@@ -16,3 +16,9 @@ TEST_CASE("binary_closed_under") {
   auto op = [](int /* unused */, int /* unused */) { return Unrelated{}; };
   CHECK(not nrng::binary_closed_under<int, decltype(op)>);
 }
+
+TEST_CASE("unary_closed_under") {
+  CHECK(nrng::unary_closed_under<int, std::negate<>>);
+  auto op = [](int /* unused */) { return Unrelated{}; };
+  CHECK(not nrng::unary_closed_under<int, decltype(op)>);
+}
