@@ -2,6 +2,8 @@
 
 #include <nrng/moment.hpp>
 
+#include <array>
+
 TEST_CASE("moments exists") {
   auto const values = std::array{1., 2., 3., 4., 5.};
   auto const result = nrng::moment<2>(values);
