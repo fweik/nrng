@@ -1,8 +1,11 @@
 #ifndef NRNG_POWER_HPP
 #define NRNG_POWER_HPP
 
+#include <nrng/type_traits.hpp>
+
 namespace nrng {
-template <unsigned Exponent, class T> constexpr T power(T x) {
+template <unsigned Exponent, binary_closed_under<std::multiplies<>> T>
+constexpr T power(T x) {
   if constexpr (Exponent == 0) {
     return T{1};
   } else {
