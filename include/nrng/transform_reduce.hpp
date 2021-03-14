@@ -131,8 +131,10 @@ T transform_reduce(ExecutionPolicy &&policy, Rng1 rng1, Rng2 rng2, T init) {
 
 template <std::move_constructible T, std::input_iterator I,
           std::sentinel_for<I> S, class BinaryOp, class UnaryOp>
-constexpr T transform_reduce(I first, S last, T init, BinaryOp binary_op,
-                             UnaryOp unary_op) {
+requires binary_closed_under<T, BinaryOp> and
+    unary_closed_under<T, UnaryOp> constexpr T
+    transform_reduce(I first, S last, T init, BinaryOp binary_op,
+                     UnaryOp unary_op) {
   return ::nrng::reduce(first, last, init, [&](auto sum, auto e) {
     return binary_op(sum, unary_op(e));
   });
@@ -141,8 +143,9 @@ constexpr T transform_reduce(I first, S last, T init, BinaryOp binary_op,
 template <execution_policy ExecutionPolicy, std::move_constructible T,
           std::forward_iterator I, std::sentinel_for<I> S, class BinaryOp,
           class UnaryOp>
-T transform_reduce(ExecutionPolicy &&policy, I first, S last, T init,
-                   BinaryOp binary_op, UnaryOp unary_op) {
+requires binary_closed_under<T, BinaryOp> and unary_closed_under<T, UnaryOp>
+    T transform_reduce(ExecutionPolicy &&policy, I first, S last, T init,
+                       BinaryOp binary_op, UnaryOp unary_op) {
   return ::nrng::reduce(
       std::forward<ExecutionPolicy>(policy), first, last, init,
       [&](auto sum, auto e) { return binary_op(sum, unary_op(e)); });
