@@ -15,7 +15,7 @@ implementation of [Kahan summation](https://en.wikipedia.org/wiki/Kahan_summatio
 
 ## Algorithms
 
-### Implemented STL algorithms
+### Constrained STL algorithms
 
 The library currently provides constrained versions of the
 following STL algorithms.
@@ -30,6 +30,25 @@ following STL algorithms.
 The algorithms should generally behave very similarly to
 the standard versions.
 
+### Statistics algorithms
+
+#### [nrng::moment](include/nrng/moment.hpp)
+
+The n-th (raw) moment $M_n$ of a sample $S$, defined as
+$$M_n = \frac{1}{|S|} \sum_{ x_i \in S } x_i^n. $$
+
+The order of summation is arbitraty, e.g. it behaves like `reduce` and not like `accumulate`. If the sample is empty,
+the moments are undefined.
+
+Example Usage
+
+```c++
+auto const avg = nrng::moment<1>(std::array{1, 2, 3, 4, 5});
+```
+
+#### Mean
+
+The mean is the 0-th raw moment.
 
 ## Getting Started
 
