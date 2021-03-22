@@ -48,10 +48,10 @@ auto const snd = nrng::moment<2>(std::array{1, 2, 3, 4, 5});
 
 #### [nrng::mean](include/nrng/moment.hpp)
 
-The mean is the 0-th raw  [moment](#nrngmoment).
+The mean is the 1st (raw) [moment](#nrngmoment).
 
 ```c++
-auto const mean = nrng::mean<1>(std::array{3., 1., 4., 1., 5., 9.});
+auto const mean = nrng::mean(std::array{3., 1., 4., 1., 5., 9.});
 ```
 
 ## Getting Started
