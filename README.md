@@ -43,12 +43,16 @@ the moments are undefined.
 Example Usage
 
 ```c++
-auto const avg = nrng::moment<1>(std::array{1, 2, 3, 4, 5});
+auto const snd = nrng::moment<2>(std::array{1, 2, 3, 4, 5});
 ```
 
-#### Mean
+#### [nrng::mean](include/nrng/moment.hpp)
 
-The mean is the 0-th raw moment.
+The mean is the 0-th raw  [moment](#nrngmoment).
+
+```c++
+auto const mean = nrng::mean<1>(std::array{3., 1., 4., 1., 5., 9.});
+```
 
 ## Getting Started
 
