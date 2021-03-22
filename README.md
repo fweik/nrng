@@ -87,12 +87,12 @@ target_link_libraries(example PRIVATE nrng::nrng)
 `main.cpp`:
 
 ```c++
-#include <nrng/reduce.hpp>
+#include <nrng/moment.hpp>
 
 #include <array>
 
 int main() {
-  return nrng::reduce(std::array{1, 2, 3, 4, 5});
+  return nrng::mean(std::array{1, 2, 3, 4, 5});
 }
 ```
 
