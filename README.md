@@ -54,6 +54,19 @@ The mean is the 1st (raw) [moment](#nrngmoment).
 auto const mean = nrng::mean(std::array{3., 1., 4., 1., 5., 9.});
 ```
 
+### Floating-point algorithms
+
+#### [nrng::kahan_plus](include/nrng/kahan.hpp)
+
+Single addition step of the [Kahan summation](https://en.wikipedia.org/wiki/Kahan_summation_algorithm), which can yield lower numerical errors. Note that this does return a struct
+containing the running sum and a compensation term. Which can
+then be used as the left argument for the next step. This can be
+used as a drop-in for `std::plus` in situations where the summation order is fixed (e.g. for `accumulate` but not `reduce`).
+
+#### [nrng::kahan_sum](include/nrng/kahan.hpp)
+
+ Compensated accumulation of a range in order with the [kahan_plus](#nrngkahan_plus) operator. This is a drop-in replacement for `accumulate(rng, init)` with error compensation.
+
 ## Getting Started
 
 The library is header only and has no dependencies, except a C++20 compatible compiler with concept and
