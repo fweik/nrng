@@ -6,7 +6,7 @@
 
 TEST_CASE("kahan_plus result test") {
   /* Test numbers, chosen such that there are not
-   * enought significant places in float for direct
+   * enough significant places in float for direct
    * summation to yield the correct result. */
   auto const init = 1000000.0F;
   auto const t1 = 3.14159F;
