@@ -72,7 +72,7 @@ auto const snd = nrng::central_moment<2>(std::array{1, 2, 3, 4, 5});
 
 #### [nrng::variance](include/nrng/central_moment.hpp)
 
-The variance is the 1st (raw) [central_moment](#nrng---centralmoment).
+The variance is the 2nd (raw) [central_moment](#nrng---centralmoment).
 
 ```c++
 auto const mean = nrng::variance(std::array{3., 1., 4., 1., 5., 9.});
