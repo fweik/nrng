@@ -12,7 +12,7 @@ foreach(TEST_SRC ${TEST_SRCS})
   message(STATUS "Adding test ${TEST_NAME} in ${TEST_SRC}")
 
   add_executable(${TEST_NAME} ${TEST_SRC})
-  target_link_libraries(${TEST_NAME} main_test nrng::nrng)
+  target_link_libraries(${TEST_NAME} main_test nrng)
 
   add_test(NAME ${TEST_NAME} COMMAND "$<TARGET_FILE:${TEST_NAME}>")
 endforeach()
