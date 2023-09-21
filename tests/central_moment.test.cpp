@@ -2,6 +2,8 @@
 
 #include <nrng/central_moment.hpp>
 
+#include <ranges>
+
 using nrng::moment;
 using nrng::central_moment;
 using nrng::mean;
