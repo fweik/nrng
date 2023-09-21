@@ -2,7 +2,7 @@
 
 #include <nrng/central_moment.hpp>
 
-#include <ranges>
+#include <array>
 
 using nrng::moment;
 using nrng::central_moment;
