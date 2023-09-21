@@ -54,6 +54,38 @@ The mean is the 1st (raw) [moment](#nrngmoment).
 auto const mean = nrng::mean(std::array{3., 1., 4., 1., 5., 9.});
 ```
 
+#### [nrng::central_moment](include/nrng/central_moment.hpp)
+
+The n-th (raw) central moment $M_n$ of a sample $S$, defined as
+$$M_n = \frac{1}{|S|} \sum_{ x_i \in S } (x_i - \mu)^n. $$
+
+where $\mu_S$ is the mean of $S$. 
+
+The order of summation is arbitraty, e.g. it behaves like `reduce` and not like `accumulate`. If the sample is empty,
+the moments are undefined.
+
+Example Usage
+
+```c++
+auto const snd = nrng::central_moment<2>(std::array{1, 2, 3, 4, 5});
+```
+
+#### [nrng::variance](include/nrng/central_moment.hpp)
+
+The variance is the 2nd (raw) [central_moment](#nrng---centralmoment).
+
+```c++
+auto const mean = nrng::variance(std::array{3., 1., 4., 1., 5., 9.});
+```
+
+#### [nrng::standard_deviation](include/nrng/central_moment.hpp)
+
+The standard deviation is the square root of the [variance](#nrng---variance).
+
+```c++
+auto const mean = nrng::standard_deviation(std::array{3., 1., 4., 1., 5., 9.});
+```
+
 ### Floating-point algorithms
 
 #### [nrng::kahan_plus](include/nrng/kahan.hpp)
